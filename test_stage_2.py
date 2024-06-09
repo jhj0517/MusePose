@@ -204,7 +204,7 @@ def main():
             result,
             os.path.join(save_dir, f"img_{ref_name}_pose_{pose_name}.mp4"),
             n_rows=1,
-            fps=src_fps if args.fps is None else args.fps,
+            fps=src_fps if args.fps is None or args.fps < 0 else args.fps,
         )    
 
         video = torch.cat([ref_image_tensor, pose_tensor[:,:,:L], video[:,:,:L]], dim=0) 
@@ -213,7 +213,7 @@ def main():
             video,
             os.path.join(save_dir, f"img_{ref_name}_pose_{pose_name}_demo.mp4"),
             n_rows=3,
-            fps=src_fps if args.fps is None else args.fps,
+            fps=src_fps if args.fps is None or args.fps < 0 else args.fps,
         )
 
     for ref_image_path_dir in config["test_cases"].keys():
