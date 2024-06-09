@@ -202,7 +202,7 @@ def main():
         result = scale_video(video[:,:,:L], original_width, original_height)
         save_videos_grid(
             result,
-            os.path.join(save_dir, f"{ref_name}_{pose_name}_{args.cfg}_{args.steps}_{args.skip}.mp4"),
+            os.path.join(save_dir, f"img_{ref_name}_pose_{pose_name}.mp4"),
             n_rows=1,
             fps=src_fps if args.fps is None else args.fps,
         )    
@@ -211,7 +211,7 @@ def main():
         video = scale_video(video, original_width, original_height)     
         save_videos_grid(
             video,
-            os.path.join(save_dir, f"{ref_name}_{pose_name}_{args.cfg}_{args.steps}_{args.skip}_{m1}_{m2}.mp4"),
+            os.path.join(save_dir, f"img_{ref_name}_pose_{pose_name}_demo.mp4"),
             n_rows=3,
             fps=src_fps if args.fps is None else args.fps,
         )
