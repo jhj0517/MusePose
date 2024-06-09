@@ -1,5 +1,6 @@
 import argparse
 from omegaconf import OmegaConf
+import torch
 
 from musepose_inference import MusePoseInference
 
