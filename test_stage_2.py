@@ -39,8 +39,9 @@ def parse_args():
     parser.add_argument("--seed",  type=int,   default=99)
     parser.add_argument("--steps", type=int,   default=20, help="DDIM sampling steps")
     parser.add_argument("--fps",   type=int)
-    
-    parser.add_argument("--skip",  type=int,   default=1, help="frame sample rate = (skip+1)") 
+    parser.add_argument("--output_dir", type=str, default="./output")
+
+    parser.add_argument("--skip",  type=int,   default=1, help="frame sample rate = (skip+1)")
     args = parser.parse_args()
 
     print('Width:', args.W)
@@ -196,13 +197,13 @@ def main():
         m2 = config.motion_module_path.split('.')[0].split('/')[-1]
 
         save_dir_name = f"{time_str}-{args.cfg}-{m1}-{m2}"
-        save_dir = Path(f"./output/video-{date_str}/{save_dir_name}")
+        save_dir = Path(os.path.join(args.output_dir, f"video-{date_str}", save_dir_name))
         save_dir.mkdir(exist_ok=True, parents=True)
 
         result = scale_video(video[:,:,:L], original_width, original_height)
         save_videos_grid(
             result,
-            f"{save_dir}/{ref_name}_{pose_name}_{args.cfg}_{args.steps}_{args.skip}.mp4",
+            os.path.join(save_dir, f"{ref_name}_{pose_name}_{args.cfg}_{args.steps}_{args.skip}.mp4"),
             n_rows=1,
             fps=src_fps if args.fps is None else args.fps,
         )    
@@ -211,7 +212,7 @@ def main():
         video = scale_video(video, original_width, original_height)     
         save_videos_grid(
             video,
-            f"{save_dir}/{ref_name}_{pose_name}_{args.cfg}_{args.steps}_{args.skip}_{m1}_{m2}.mp4",
+            os.path.join(save_dir, f"{ref_name}_{pose_name}_{args.cfg}_{args.steps}_{args.skip}_{m1}_{m2}.mp4"),
             n_rows=3,
             fps=src_fps if args.fps is None else args.fps,
         )
