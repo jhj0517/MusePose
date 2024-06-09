@@ -1,6 +1,7 @@
 import argparse
 from omegaconf import OmegaConf
 import torch
+from pprint import pprint
 
 from musepose_inference import MusePoseInference
 
@@ -23,36 +24,24 @@ def parse_args():
     parser.add_argument("--skip",  type=int,   default=1, help="frame sample rate = (skip+1)")
     args = parser.parse_args()
 
-    print('Width:', args.W)
-    print('Height:', args.H)
-    print('Length:', args.L)
-    print('Slice:', args.S)
-    print('Overlap:', args.O)
-    print('Classifier free guidance:', args.cfg)
-    print('DDIM sampling steps :', args.steps)
-    print("skip", args.skip)
+    pprint(vars(args))
 
     return args
 
 
 def main():
     args = parse_args()
-
     config = OmegaConf.load(args.config)
 
-    if config.weight_dtype == "fp16":
-        weight_dtype = torch.float16
-    else:
-        weight_dtype = torch.float32
-
     musepose_infer = MusePoseInference(config=config, output_dir=args.output_dir)
+
     ref_image_path = list(config["test_cases"].keys())[0]
     pose_video_path = config["test_cases"][ref_image_path][0]
 
     output_file_path = musepose_infer.infer_musepose(
         ref_image_path=ref_image_path,
         pose_video_path=pose_video_path,
-        weight_dtype=weight_dtype,
+        weight_dtype=config.weight_dtype,
         W=args.W,
         H=args.H,
         L=args.L,
