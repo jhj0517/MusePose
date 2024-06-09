@@ -25,9 +25,9 @@ class MusePoseInference:
                  output_dir
                  ):
         self.models_paths = {
-            "pretrained_base_model": config["sd-image-variations-diffusers"],
-            "pretrained_vae": config["sd-vae-ft-mse"],
-            "image_encoder": config["image_encoder"],
+            "pretrained_base_model": config["pretrained_base_model_path"],
+            "pretrained_vae": config["pretrained_vae_path"],
+            "image_encoder": config["image_encoder_path"],
             "denoising_unet": config["denoising_unet_path"],
             "reference_unet": config["reference_unet_path"],
             "pose_guider": config["pose_guider_path"],
