@@ -24,8 +24,6 @@ def parse_args():
     parser.add_argument("--skip",  type=int,   default=1, help="frame sample rate = (skip+1)")
     args = parser.parse_args()
 
-    pprint(vars(args))
-
     return args
 
 
