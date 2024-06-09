@@ -196,8 +196,7 @@ def main():
         m1 = config.pose_guider_path.split('.')[0].split('/')[-1]
         m2 = config.motion_module_path.split('.')[0].split('/')[-1]
 
-        save_dir_name = f"{time_str}-{args.cfg}-{m1}-{m2}"
-        save_dir = Path(os.path.join(args.output_dir, f"video-{date_str}", save_dir_name))
+        save_dir = Path(args.output_dir)
         save_dir.mkdir(exist_ok=True, parents=True)
 
         result = scale_video(video[:,:,:L], original_width, original_height)
