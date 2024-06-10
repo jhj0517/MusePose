@@ -58,14 +58,20 @@ class MusePoseInference:
         fps: int,
         skip: int
     ):
-        print('Width:', W)
-        print('Height:', H)
-        print('Length:', L)
-        print('Slice:', S)
-        print('Overlap:', O)
-        print('Classifier free guidance:', cfg)
-        print('DDIM sampling steps :', steps)
-        print("skip", skip)
+        print(f"Model Paths: {self.models_paths}")
+        print(f"Input Image Path: {ref_image_path}")
+        print(f"Pose Video Path: {pose_video_path}")
+        print(f"Dtype: {weight_dtype}")
+        print(f"Width: {W}")
+        print(f"Height: {H}")
+        print(f"Video Frame Length: {L}")
+        print(f"VIDEO SLICE FRAME LENGTH:: {S}")
+        print(f"VIDEO SLICE OVERLAP_FRAME NUMBER: {O}")
+        print(f"CFG: {cfg}")
+        print(f"Seed: {seed}")
+        print(f"Steps: {steps}")
+        print(f"FPS: {fps}")
+        print(f"Skip: {skip}")
 
         image_file_name = os.path.splitext(os.path.basename(ref_image_path))[0]
         pose_video_file_name = os.path.splitext(os.path.basename(pose_video_path))[0]
