@@ -19,6 +19,7 @@ def parse_args():
     parser.add_argument("--seed",  type=int,   default=99)
     parser.add_argument("--steps", type=int,   default=20, help="DDIM sampling steps")
     parser.add_argument("--fps",   type=int)
+    parser.add_argument("--weight_dtype", type=str, default="fp16")
     parser.add_argument("--output_dir", type=str, default="./output")
 
     parser.add_argument("--skip",  type=int,   default=1, help="frame sample rate = (skip+1)")
@@ -39,7 +40,7 @@ def main():
     output_file_path = musepose_infer.infer_musepose(
         ref_image_path=ref_image_path,
         pose_video_path=pose_video_path,
-        weight_dtype=config.weight_dtype,
+        weight_dtype=args.weight_dtype,
         W=args.W,
         H=args.H,
         L=args.L,
